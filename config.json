@@ -1,0 +1,6 @@
+{
+  "mongo": {
+    "url": "mongodb://192.241.254.151:27017/",
+    "name": "test_config"
+  }
+}
