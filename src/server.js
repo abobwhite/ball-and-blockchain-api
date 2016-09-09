@@ -64,7 +64,8 @@ server.on('uncaughtException', function (req, res, route, err) {
 server.on('after', restify.auditLogger({ log: log }));
 
 // CREATE MONGO PROXY
-const mongoProxy = new MongoProxy(CONFIG.mongo.url + CONFIG.mongo.name);
+let monogUrl = !!process.env.MONGO_URL ? process.env.MONGO_URL : CONFIG.mongo.url;
+const mongoProxy = new MongoProxy(monogUrl + CONFIG.mongo.name);
 
 // INJECT ROUTES
 routes(server, mongoProxy);
