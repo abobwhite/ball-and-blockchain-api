@@ -1,12 +1,8 @@
 'use strict';
-import {default as People} from '../../eth/build/contracts/People.sol';
-
-const peopleContract = People.deployed();
 
 export default class UsersSvc {
-  constructor(mongoProxy, ETHEREUM_CLIENT) {
+  constructor(mongoProxy) {
     this.mongoProxy = mongoProxy;
-    this.ETHEREUM_CLIENT = ETHEREUM_CLIENT;
   }
 
   findById(id) {
@@ -18,9 +14,7 @@ export default class UsersSvc {
   }
 
   findMany() {
-    return new Promise((resolve, reject)=>{
-      peopleContract.getPeople().then(resolve).catch(reject);
-    });
+
   }
 
   create(user) {
