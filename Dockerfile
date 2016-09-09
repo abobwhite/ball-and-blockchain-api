@@ -1,10 +1,12 @@
 FROM node:6-onbuild
 
-# Copy application files and set working dir
-RUN mkdir -p /ball-and-blockchain-api
-WORKDIR /ball-and-blockchain-api
-COPY . /ball-and-blockchain-api
-RUN npm set progress=false && npm install
+ADD package.json /tmp/package.json
+RUN cd /tmp && npm set progress=false && npm install
+RUN mkdir -p /ball-and-blockchain-api && cp -a /tmp/node_modules /ball-and-blockchain-api
+
+WORKDIR /ball-and-blockchain-web
+ADD . /ball-and-blockchain-web
+
 RUN npm run build
 
 EXPOSE 8080
